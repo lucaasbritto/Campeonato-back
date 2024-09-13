@@ -30,5 +30,15 @@ class FootballService
         }        
     }
 
+    // Buscar Classificação
+    public function getClassification(){
+        try {
+            $response = $this->client->get("competitions/BSA/standings");
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (RequestException $e) {
+            return ['error' => 'Erro ao buscar a classficação do campeonato: ' . $e->getMessage()];
+        }        
+    }
+
     
 }
