@@ -17,4 +17,9 @@ class FootballController extends Controller{
         $data = $this->footballService->getTeams();
         return response()->json($data);
     }
+
+    public function searchClassification(){
+        $data = $this->footballService->getClassification();
+        return response()->json($data);        
+    }
 }
