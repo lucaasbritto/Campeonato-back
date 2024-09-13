@@ -19,4 +19,16 @@ class FootballService
             ],
         ]);
     }
+
+    // Buscar Times
+    public function getTeams(){
+        try {
+            $response = $this->client->get("competitions/BSA/teams");
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (RequestException $e) {
+            return ['error' => 'Erro ao buscar os times: ' . $e->getMessage()];
+        }        
+    }
+
+    
 }

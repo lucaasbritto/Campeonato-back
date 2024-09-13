@@ -11,5 +11,10 @@ class FootballController extends Controller{
     public function __construct(FootballService $footballService)
     {
         $this->footballService = $footballService;
-    }    
+    }
+
+    public function searchTeams(){
+        $data = $this->footballService->getTeams();
+        return response()->json($data);
+    }
 }
