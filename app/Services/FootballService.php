@@ -40,5 +40,32 @@ class FootballService
         }        
     }
 
+     // Buscar Partidas
+     public function getMatches(){
+        try {
+            //Buscar numero da ultima rodada
+            $classification = $this->getClassification();
+            $lastMatchday = $classification['season']['currentMatchday'];
+
+            $response = $this->client->get("competitions/2013/matches");
+            $matches = json_decode($response->getBody()->getContents(), true)['matches'];
+
+            // Organize as partidas por número de rodada
+            $groupedByMatchday = collect($matches)->groupBy('matchday');
+
+            // Identifica o maior número de rodada (última rodada)
+            $lastMatchdayMatches = $groupedByMatchday->get($lastMatchday, []);
+
+            // Retorna as partidas da última rodada            
+            return response()->json([
+                'lastMatchday' => $lastMatchday,
+                'matchDay' => $lastMatchdayMatches,
+                'allMatches' => $matches
+            ]);
+        } catch (RequestException $e) {
+            return ['error' => 'Erro ao buscar a classficação do campeonato: ' . $e->getMessage()];
+        }
+    }
+
     
 }

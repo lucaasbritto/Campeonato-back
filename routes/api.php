@@ -20,3 +20,4 @@ use App\Http\Controllers\FootballController;
 
 Route::get('teams', [FootballController::class, 'searchTeams']);
 Route::get('classification', [FootballController::class, 'searchClassification']);
+Route::get('matches', [FootballController::class, 'searchMatches']);
