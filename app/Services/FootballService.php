@@ -40,8 +40,8 @@ class FootballService
         }        
     }
 
-     // Buscar Partidas
-     public function getMatches(){
+    // Buscar Partidas
+    public function getMatches(){
         try {
             //Buscar numero da ultima rodada
             $classification = $this->getClassification();
@@ -66,6 +66,17 @@ class FootballService
             return ['error' => 'Erro ao buscar a classficação do campeonato: ' . $e->getMessage()];
         }
     }
+
+    // Buscar Artilheiro
+    public function getTopScorer(){
+        try {
+            $response = $this->client->get("competitions/BSA/scorers?limit=20");
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (RequestException $e) {
+            return ['error' => 'Erro ao buscar Artilheiro do campeonato: ' . $e->getMessage()];
+        } 
+    }  
+
 
     
 }
