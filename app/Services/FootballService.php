@@ -56,6 +56,23 @@ class FootballService
             // Identifica o maior número de rodada (última rodada)
             $lastMatchdayMatches = $groupedByMatchday->get($lastMatchday, []);
 
+            // Verifica se todos os jogos da rodada foi finalizado
+            $allFinished = collect($lastMatchdayMatches)->every(function ($match) {
+                return $match['status'] === 'FINISHED';                
+            });
+                
+            // Se todos os jogos estão completos, pega a próxima rodada
+            if ($allFinished) {
+                $nextMatchday = $lastMatchday + 1;
+                $nextMatchdayMatches = $groupedByMatchday->get($nextMatchday, []);
+                return response()->json([
+                    'lastMatchday' => $lastMatchday,
+                    'nextMatchday' => $nextMatchday,
+                    'matchDay' => $nextMatchdayMatches,
+                    'allMatches' => $matches
+                ]);
+            }
+           
             // Retorna as partidas da última rodada            
             return response()->json([
                 'lastMatchday' => $lastMatchday,
