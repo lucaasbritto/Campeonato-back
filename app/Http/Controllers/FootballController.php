@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 /**
  * @OA\Info(title="Football API", version="1.0", description="API to retrieve football-related data.")
- * @OA\Server(url=env('APP_ENV') === 'local' ? config('app.url') . '/api' : env('API_URL'))
+ * @OA\Server(url="http://localhost:8000/api")
  */
 
 class FootballController extends Controller{

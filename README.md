@@ -8,7 +8,7 @@ Composer
 Swagger
 
 ## Documentação no Swagger
-[Documentação da API](https://lucasbritto.com/football/api/documentation)
+[Documentação do projeto](https://apifootball.lucasbritto.com/api/documentation)
 
 
 ## Instalação BACKEND
