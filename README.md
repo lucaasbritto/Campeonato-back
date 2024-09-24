@@ -7,6 +7,10 @@ Laravel
 Composer
 Swagger
 
+## Documentação no Swagger
+[Documentação da API](https://lucasbritto.com/football/api/documentation)
+
+
 ## Instalação BACKEND
 
 1. Clone o repositório:
