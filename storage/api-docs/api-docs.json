@@ -1,0 +1,445 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Football API",
+        "description": "API to retrieve football-related data.",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api"
+        }
+    ],
+    "paths": {
+        "/teams": {
+            "get": {
+                "tags": [
+                    "Football"
+                ],
+                "summary": "Buscar Times",
+                "description": "Exibe todos os dados de cada time",
+                "operationId": "0a500629e642a0dcd4e124f20f52b7fd",
+                "responses": {
+                    "200": {
+                        "description": "Exibindo todos os dados de cada clube",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "description": "ID of the team",
+                                                "type": "integer",
+                                                "example": 1765
+                                            },
+                                            "name": {
+                                                "description": "Nome do Time",
+                                                "type": "string",
+                                                "example": "Fluminense FC"
+                                            },
+                                            "crest": {
+                                                "description": "Escudo do time",
+                                                "type": "string",
+                                                "example": "https://crests.football-data.org/1765.png"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Time não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No teams found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/classification": {
+            "get": {
+                "tags": [
+                    "Football"
+                ],
+                "summary": "Tabela de classificação",
+                "description": "Exibe a tabela de classifição do campeonato",
+                "operationId": "e9f770e7661118bda18d7c1e13d880ab",
+                "responses": {
+                    "200": {
+                        "description": "Exibe a tabela de classifição do campeonato",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "position": {
+                                                "description": "Position in the league",
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "team": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "Team ID",
+                                                        "type": "integer",
+                                                        "example": 1770
+                                                    },
+                                                    "name": {
+                                                        "description": "Team name",
+                                                        "type": "string",
+                                                        "example": "Botafogo FR"
+                                                    },
+                                                    "shortName": {
+                                                        "description": "Short name of the team",
+                                                        "type": "string",
+                                                        "example": "Botafogo"
+                                                    },
+                                                    "tla": {
+                                                        "description": "Three-letter abbreviation",
+                                                        "type": "string",
+                                                        "example": "BOT"
+                                                    },
+                                                    "crest": {
+                                                        "description": "Team crest URL",
+                                                        "type": "string",
+                                                        "example": "https://crests.football-data.org/1770.png"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "playedGames": {
+                                                "description": "Total games played",
+                                                "type": "integer",
+                                                "example": 27
+                                            },
+                                            "form": {
+                                                "description": "Recent form",
+                                                "type": "string",
+                                                "example": null
+                                            },
+                                            "won": {
+                                                "description": "Games won",
+                                                "type": "integer",
+                                                "example": 17
+                                            },
+                                            "draw": {
+                                                "description": "Games drawn",
+                                                "type": "integer",
+                                                "example": 5
+                                            },
+                                            "lost": {
+                                                "description": "Games lost",
+                                                "type": "integer",
+                                                "example": 5
+                                            },
+                                            "points": {
+                                                "description": "Total points",
+                                                "type": "integer",
+                                                "example": 56
+                                            },
+                                            "goalsFor": {
+                                                "description": "Goals scored",
+                                                "type": "integer",
+                                                "example": 46
+                                            },
+                                            "goalsAgainst": {
+                                                "description": "Goals conceded",
+                                                "type": "integer",
+                                                "example": 25
+                                            },
+                                            "goalDifference": {
+                                                "description": "Goal difference",
+                                                "type": "integer",
+                                                "example": 21
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/matches": {
+            "get": {
+                "tags": [
+                    "Football"
+                ],
+                "summary": "Todos os jogos por rodada",
+                "description": "Exibe todos os jogos do campeonato",
+                "operationId": "d533e2bee896395bfe08936531457918",
+                "responses": {
+                    "200": {
+                        "description": "Exibe todos os jogos do campeonato",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "description": "Match ID",
+                                                "type": "integer",
+                                                "example": 494031
+                                            },
+                                            "utcDate": {
+                                                "description": "Match date in UTC",
+                                                "type": "string",
+                                                "example": "2024-09-28T21:30:00Z"
+                                            },
+                                            "status": {
+                                                "description": "Current status of the match",
+                                                "type": "string",
+                                                "example": "TIMED"
+                                            },
+                                            "matchday": {
+                                                "description": "Matchday number",
+                                                "type": "integer",
+                                                "example": 28
+                                            },
+                                            "stage": {
+                                                "description": "Stage of the match",
+                                                "type": "string",
+                                                "example": "REGULAR_SEASON"
+                                            },
+                                            "group": {
+                                                "description": "Match group",
+                                                "type": "string",
+                                                "example": null
+                                            },
+                                            "lastUpdated": {
+                                                "description": "Last update time",
+                                                "type": "string",
+                                                "example": "2024-09-24T00:20:51Z"
+                                            },
+                                            "homeTeam": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "Home team ID",
+                                                        "type": "integer",
+                                                        "example": 1769
+                                                    },
+                                                    "name": {
+                                                        "description": "Home team name",
+                                                        "type": "string",
+                                                        "example": "SE Palmeiras"
+                                                    },
+                                                    "shortName": {
+                                                        "description": "Home team short name",
+                                                        "type": "string",
+                                                        "example": "Palmeiras"
+                                                    },
+                                                    "tla": {
+                                                        "description": "Home team TLA",
+                                                        "type": "string",
+                                                        "example": "PAL"
+                                                    },
+                                                    "crest": {
+                                                        "description": "Home team crest URL",
+                                                        "type": "string",
+                                                        "example": "https://crests.football-data.org/1769.png"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "awayTeam": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "Away team ID",
+                                                        "type": "integer",
+                                                        "example": 1766
+                                                    },
+                                                    "name": {
+                                                        "description": "Away team name",
+                                                        "type": "string",
+                                                        "example": "CA Mineiro"
+                                                    },
+                                                    "shortName": {
+                                                        "description": "Away team short name",
+                                                        "type": "string",
+                                                        "example": "Mineiro"
+                                                    },
+                                                    "tla": {
+                                                        "description": "Away team TLA",
+                                                        "type": "string",
+                                                        "example": "CAM"
+                                                    },
+                                                    "crest": {
+                                                        "description": "Away team crest URL",
+                                                        "type": "string",
+                                                        "example": "https://crests.football-data.org/1766.png"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "score": {
+                                                "properties": {
+                                                    "winner": {
+                                                        "description": "Winning team",
+                                                        "type": "string",
+                                                        "example": null
+                                                    },
+                                                    "duration": {
+                                                        "description": "Match duration",
+                                                        "type": "string",
+                                                        "example": "REGULAR"
+                                                    },
+                                                    "fullTime": {
+                                                        "properties": {
+                                                            "home": {
+                                                                "description": "Full-time score for home team",
+                                                                "type": "integer",
+                                                                "example": null
+                                                            },
+                                                            "away": {
+                                                                "description": "Full-time score for away team",
+                                                                "type": "integer",
+                                                                "example": null
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "halfTime": {
+                                                        "properties": {
+                                                            "home": {
+                                                                "description": "Half-time score for home team",
+                                                                "type": "integer",
+                                                                "example": null
+                                                            },
+                                                            "away": {
+                                                                "description": "Half-time score for away team",
+                                                                "type": "integer",
+                                                                "example": null
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/topScorers": {
+            "get": {
+                "tags": [
+                    "Football"
+                ],
+                "summary": "Buscar artilharia e assistencia",
+                "description": "Exibe os jogadores com mais gols e assistencia na competição",
+                "operationId": "d1c97f946e63b3d7f392ed51bcab55bb",
+                "responses": {
+                    "200": {
+                        "description": "Exibe os jogadores com mais gols e assistencia na competição",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "player": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "Player ID",
+                                                        "type": "integer",
+                                                        "example": 1077
+                                                    },
+                                                    "name": {
+                                                        "description": "Player name",
+                                                        "type": "string",
+                                                        "example": "Pedro"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "team": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "Team ID",
+                                                        "type": "integer",
+                                                        "example": 1783
+                                                    },
+                                                    "name": {
+                                                        "description": "Team name",
+                                                        "type": "string",
+                                                        "example": "CR Flamengo"
+                                                    },
+                                                    "shortName": {
+                                                        "description": "Short name of the team",
+                                                        "type": "string",
+                                                        "example": "Flamengo"
+                                                    },
+                                                    "tla": {
+                                                        "description": "Three-letter abbreviation",
+                                                        "type": "string",
+                                                        "example": "FLA"
+                                                    },
+                                                    "crest": {
+                                                        "description": "Team crest URL",
+                                                        "type": "string",
+                                                        "example": "https://crests.football-data.org/1783.png"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "playedMatches": {
+                                                "description": "Matches played by the player",
+                                                "type": "integer",
+                                                "example": 21
+                                            },
+                                            "goals": {
+                                                "description": "Total goals scored",
+                                                "type": "integer",
+                                                "example": 11
+                                            },
+                                            "assists": {
+                                                "description": "Total assists made",
+                                                "type": "integer",
+                                                "example": 5
+                                            },
+                                            "penalties": {
+                                                "description": "Total penalties scored",
+                                                "type": "integer",
+                                                "example": 4
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Football",
+            "description": "Football"
+        }
+    ]
+}
